@@ -1,0 +1,65 @@
+@Api_HostAddress = http://localhost:5231
+
+### Create a product
+POST {{Api_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Mechanical Keyboard",
+  "description": "Tactile switches"
+}
+
+### List products (paged)
+GET {{Api_HostAddress}}/api/products?page=1&pageSize=10
+Accept: application/json
+
+### Get a product by id
+@ProductId = 00000000-0000-0000-0000-000000000000
+
+GET {{Api_HostAddress}}/api/products/{{ProductId}}
+Accept: application/json
+
+### Rename a product
+PUT {{Api_HostAddress}}/api/products/{{ProductId}}/name
+Content-Type: application/json
+
+{
+  "newProductName": "Renamed Keyboard"
+}
+
+### Delete a product
+DELETE {{Api_HostAddress}}/api/products/{{ProductId}}
+
+### Unknown id -> 404 PRODUCT.NOT_FOUND
+GET {{Api_HostAddress}}/api/products/11111111-1111-1111-1111-111111111111
+Accept: application/json
+
+### Duplicate name -> 409 PRODUCT.CONFLICT
+POST {{Api_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Mechanical Keyboard",
+  "description": "Tactile switches"
+}
+
+### Empty name -> 400 VALIDATION_ERROR
+POST {{Api_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "description": "x"
+}
+
+### Short new name -> 400 VALIDATION_ERROR
+PUT {{Api_HostAddress}}/api/products/{{ProductId}}/name
+Content-Type: application/json
+
+{
+  "newProductName": "ab"
+}
+
+### Invalid pagination -> 400 VALIDATION_ERROR
+GET {{Api_HostAddress}}/api/products?page=0&pageSize=10
+Accept: application/json

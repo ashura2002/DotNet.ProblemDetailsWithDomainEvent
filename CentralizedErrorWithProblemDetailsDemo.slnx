@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="Src/Core/Application/Application.csproj" />
+    <Project Path="Src/Core/Domain/Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Src/Infrastructure/Infra/Infra.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Src/Presentation/Api/Api.csproj" Id="1c9a5e06-df81-412f-98f4-9734ba9cdc4d" />
+  </Folder>
+</Solution>
